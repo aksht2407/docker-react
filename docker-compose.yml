@@ -1,0 +1,14 @@
+version: "3"
+services:
+  web:
+    build:
+      context: . # build context
+      dockerfile: Dockerfile.dev # your dev Dockerfile
+    ports:
+      - "3000:3000" # map container port to host
+    volumes:
+      - .:/app # mount your project folder
+      - /app/node_modules # keep container node_modules safe
+    environment:
+      - CHOKIDAR_USEPOLLING=true # enables polling for file changes
+      - WATCHPACK_POLLING=true # ensures hot-reload works reliably on Windows
