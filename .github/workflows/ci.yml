@@ -22,12 +22,16 @@ jobs:
 
       # 3. Install dependencies
       - name: Install dependencies
-        run: npm install
+        run: |
+          cd frontend
+          npm install
 
-      # 4. Run tests (IMPORTANT FIX)
+      # 4. Run tests
       - name: Run tests
-        run: npm test -- --watchAll=false
+        run: |
+          cd frontend
+          npm test -- --watchAll=false
 
       # 5. Build Docker image
       - name: Build Docker Image
-        run: docker build -t docker-react .
+        run: docker build -t docker-react -f ./frontend/Dockerfile.dev ./frontend
